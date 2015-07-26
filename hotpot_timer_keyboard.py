@@ -1,12 +1,15 @@
 import time
-import datetime
+from termios import tcflush, TCIFLUSH
+import time,sys
+
 while True:
+
     run = raw_input("press enter to start")
-    Elapsed = 0
     TimerSet = 5
     if run == "":
         datenow = time.strftime('%H:%M:%S')
-        print "running"
-        print "run signal recieved at", datenow, "duration:", TimerSet, "minutes"
+        print datenow, "running"
         time.sleep(TimerSet)
-        print "done"
+        tcflush(sys.stdin, TCIFLUSH)
+        datenow = time.strftime('%H:%M:%S')
+        print datenow, "done"
